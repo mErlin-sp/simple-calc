@@ -4,6 +4,10 @@
     font-weight: normal;
 }
 
+html {
+    overscroll-behavior: none;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -55,4 +59,10 @@ body {
 .output .current-operand {
     color: white;
     font-size: 2.5rem;
+}
+
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 4rem;
+    }
 }

@@ -74,11 +74,9 @@ class Calculator {
     }
 
     updateDisplay() {
-        this.currentOperandTextElement.innerText =
-            this.getDisplayNumber(this.currentOperand)
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
         if (this.operation != null) {
-            this.previousOperandTextElement.innerText =
-                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
             this.previousOperandTextElement.innerText = ''
         }
@@ -123,4 +121,11 @@ allClearButton.addEventListener('click', () => {
 deleteButton.addEventListener('click', () => {
     calculator.delete()
     calculator.updateDisplay()
+})
+
+$(document).ready(function () {
+    const disableBodyScroll = bodyScrollLock.disableBodyScroll;
+    const targetElement = document.querySelector('html');
+
+    disableBodyScroll(targetElement);
 })

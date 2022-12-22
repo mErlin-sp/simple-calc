@@ -7,6 +7,7 @@
 html {
     overscroll-behavior: none;
     overflow: hidden;
+    touch-action: none;
 }
 
 body {

@@ -21,16 +21,18 @@ body {
     justify-content: center;
     align-content: center;
     min-height: 100vh;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    grid-template-columns: repeat(4, min(100px, 25vw, 15vh));
+    grid-template-rows: min(120px, 25vw, 15vh) repeat(5, min(100px, 25vw, 15vh));
+    padding: 0;
 }
 
 .calculator-grid > button {
     cursor: pointer;
-    font-size: 2rem;
-    border: 1px solid white;
+    font-size: min(2rem, 5vmin);
+    border: min(1px, 0.1vw) solid white;
     outline: none;
     background-color: rgba(255, 255, 255, .75);
+    padding: 0;
 }
 
 .calculator-grid > button:hover {
@@ -48,23 +50,17 @@ body {
     align-items: flex-end;
     justify-content: space-around;
     flex-direction: column;
-    padding: 10px;
+    padding: min(10px, 2vmin);
     word-wrap: break-word;
     word-break: break-all;
 }
 
 .output .previous-operand {
     color: rgba(255, 255, 255, .75);
-    font-size: 1.5rem;
+    font-size: min(1.5rem, 4vmin);
 }
 
 .output .current-operand {
     color: white;
-    font-size: 2.5rem;
-}
-
-@media (min-width: 1200px) {
-    h1 {
-        font-size: 4rem;
-    }
+    font-size: min(2.5rem, 7vmin);
 }

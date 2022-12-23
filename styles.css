@@ -22,7 +22,7 @@ body {
     align-content: center;
     min-height: 100vh;
     grid-template-columns: repeat(4, min(100px, 25vw, 15vh));
-    grid-template-rows: min(120px, 25vw, 15vh) repeat(5, min(100px, 25vw, 15vh));
+    grid-template-rows: min(120px, 25vw, 15vh) repeat(5, min(100px, 25vw, 15vh)) min-content;
     padding: 0;
 }
 
@@ -90,7 +90,7 @@ body {
 
 .history {
     grid-column: 1 / -1;
-    grid-row: 2 / -1;
+    grid-row: 2 / -2;
     background-color: rgba(0, 0, 0, .75);
     overflow: auto;
     color: white;
@@ -161,4 +161,46 @@ body {
 
 .history .oper, .history .eq {
     color: white;
+}
+
+.info {
+    grid-row: 7;
+    grid-column: 1/-1;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .75);
+    padding: 0 10%;
+}
+
+ .info span {
+    width: min-content;
+    white-space: nowrap;
+    font-size: min(2vmin, 20px);
+    font-weight: bold;
+    color: white;
+}
+
+.info .github {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: min-content;
+}
+
+.info .github img {
+    width: min(50px, 5vmin);
+}
+
+.info .github span {
+    flex: 5 auto;
+}
+
+.info a{
+    height: 0;
+    overflow: hidden;
 }

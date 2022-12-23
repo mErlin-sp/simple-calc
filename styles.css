@@ -204,3 +204,11 @@ body {
     height: 0;
     overflow: hidden;
 }
+
+@supports (-webkit-touch-callout: none) {
+    .calculator-grid{
+        min-height: -webkit-fill-available;
+        height: -webkit-fill-available;
+    }
+}
+

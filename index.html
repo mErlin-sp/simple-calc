@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Online Calculator by Oleksandr Popov</title>
     <link href="styles.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+            integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
 <div class="calculator-grid">
+    <div class="history-button">
+        <img src="data:image/png;base64,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"
+             alt="time machine">
+    </div>
     <div class="output">
         <div data-previous-operand class="previous-operand"></div>
         <div data-current-operand class="current-operand"></div>
+    </div>
+    <div class="history">
+
     </div>
     <button data-all-clear class="span-two">AC</button>
     <button data-delete>DEL</button>

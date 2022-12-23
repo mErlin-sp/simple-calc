@@ -44,7 +44,7 @@ body {
 }
 
 .output {
-    grid-column: 1 / -1;
+    grid-column: span 3;
     background-color: rgba(0, 0, 0, .75);
     display: flex;
     align-items: flex-end;
@@ -53,6 +53,7 @@ body {
     padding: min(10px, 2vmin);
     word-wrap: break-word;
     word-break: break-all;
+    position: relative;
 }
 
 .output .previous-operand {
@@ -64,3 +65,88 @@ body {
     color: white;
     font-size: min(2.5rem, 7vmin);
 }
+
+.history-button {
+    background-color: rgba(0, 0, 0, .75);
+    position: relative;
+}
+
+.history-button img {
+    height: calc(min(120px, 25vw, 15vh) / 2);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50%, 50%);
+}
+
+.history-button img:hover {
+    filter: opacity(50%);
+}
+
+.history {
+    grid-column: 1 / -1;
+    grid-row: 2 / -1;
+    background-color: rgba(0, 0, 0, .75);
+    overflow: auto;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: min(10px, 2vmin);
+    gap: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: white;
+}
+
+.history::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+}
+
+.history::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.history::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+.history > div {
+    flex: none;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /*word-wrap: break-word;*/
+    /*word-break: break-all;*/
+}
+
+.history span {
+    font-size: min(2.5rem, 7vmin);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.history .prev {
+    color: #00AAFF;
+}
+
+.history .curr {
+    color: #00FF6C;
+}
+
+.history .comp {
+    color: #00D5B6;
+}
+
+.history .oper, .history .eq {
+    color: white;
+    /*margin: 0 max(20px, 5vmax);*/
+}
+

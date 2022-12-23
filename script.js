@@ -3,6 +3,30 @@ class Calculator {
         this.previousOperandTextElement = previousOperandTextElement
         this.currentOperandTextElement = currentOperandTextElement
         this.clear()
+
+        if (localStorage.getItem('calc-history') === null) this.clearHistory()
+    }
+
+    clearHistory() {
+        localStorage.setItem('calc-history', '{[]}')
+    }
+
+    getHistory() {
+        try {
+            let history = JSON.parse(localStorage.getItem('calc-history'))
+            if (!(history instanceof Array)) {
+                return []
+            }
+            return history
+        } catch (e) {
+            return []
+        }
+    }
+
+    appendHistory(previousOperand, currentOperand, operation, computation) {
+        let history = this.getHistory()
+        history.push([previousOperand, currentOperand, operation, computation])
+        localStorage.setItem('calc-history', JSON.stringify(history))
     }
 
     clear() {
@@ -17,6 +41,7 @@ class Calculator {
 
     appendNumber(number) {
         if (number === '.' && this.currentOperand.includes('.')) return
+        if (this.currentOperand.length >= 10) return
         this.currentOperand = this.currentOperand.toString() + number.toString()
     }
 
@@ -51,6 +76,7 @@ class Calculator {
             default:
                 return
         }
+        this.appendHistory(this.previousOperand, this.currentOperand, this.operation, computation)
         this.currentOperand = computation
         this.operation = undefined
         this.previousOperand = ''
@@ -74,14 +100,19 @@ class Calculator {
     }
 
     updateDisplay() {
-        this.currentOperandTextElement.innerText =
-            this.getDisplayNumber(this.currentOperand)
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
         if (this.operation != null) {
-            this.previousOperandTextElement.innerText =
-                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
             this.previousOperandTextElement.innerText = ''
         }
+    }
+
+    updateHistory() {
+        $('.history').empty()
+        this.getHistory().forEach(([prev, curr, oper, comp]) => {
+            $('.history').append(`<div><span class="prev">${prev}</span> <span class="oper">${oper}</span> <span class="curr">${curr}</span><span class="eq">=</span><span class="comp">${comp}</span></div>`)
+        })
     }
 }
 
@@ -93,6 +124,7 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
+const historyButton = document.querySelector('.history-button')
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
@@ -124,3 +156,14 @@ deleteButton.addEventListener('click', () => {
     calculator.delete()
     calculator.updateDisplay()
 })
+
+historyButton.addEventListener('click', () => {
+    $('.calculator-grid > button, .history').toggle()
+    calculator.updateHistory()
+})
+
+historyButton.addEventListener('dblclick', () => {
+    calculator.clearHistory()
+})
+
+$('.history').hide()

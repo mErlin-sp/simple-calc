@@ -66,12 +66,16 @@ body {
     font-size: min(2.5rem, 7vmin);
 }
 
-.history-button {
+.history-button, .download-history, .send-history, .clear-history {
     background-color: rgba(0, 0, 0, .75);
     position: relative;
 }
 
-.history-button img {
+.download-history, .send-history, .clear-history {
+    display: none;
+}
+
+.history-button img, .download-history img, .send-history img, .clear-history img {
     height: calc(min(120px, 25vw, 15vh) / 2);
 
     position: absolute;
@@ -80,7 +84,7 @@ body {
     transform: translate(50%, 50%);
 }
 
-.history-button img:hover {
+.history-button img:hover, .download-history img:hover, .send-history img:hover, .clear-history img:hover {
     filter: opacity(50%);
 }
 

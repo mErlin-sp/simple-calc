@@ -132,7 +132,11 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
-const historyButton = document.querySelector('.history-button')
+
+const historyButton = $('.history-button')
+const downloadHistoryButton = $('.download-history')
+const sendHistoryButton = $('.send-history')
+const clearHistoryButton = $('.clear-history')
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
@@ -165,13 +169,38 @@ deleteButton.addEventListener('click', () => {
     calculator.updateDisplay()
 })
 
-historyButton.addEventListener('click', () => {
-    $('.calculator-grid > button, .history').toggle()
+historyButton.click(function () {
+    $('.calculator-grid > button, .history, .output, .download-history, .send-history, .clear-history').toggle()
     calculator.updateHistory()
 })
 
-historyButton.addEventListener('dblclick', () => {
-    calculator.clearHistory()
+downloadHistoryButton.click(function () {
+    let fileName = 'calculation-history.json';
+
+    let fileToSave = new Blob([JSON.stringify(calculator.getHistory())], {
+        type: 'application/json'
+    });
+
+    saveAs(fileToSave, fileName);
 })
 
-$('.history').hide()
+sendHistoryButton.click(async function () {
+    const shareData = {
+        title: 'Calculation History',
+        text: JSON.stringify(calculator.getHistory()),
+        url: 'https://merlin-sp.github.io/simple-calc/'
+    }
+
+    try {
+        await navigator.share(shareData);
+    } catch (err) {
+        alert(`It was error while sharing: ${err}`)
+    }
+})
+
+clearHistoryButton.click(function () {
+    calculator.clearHistory()
+    calculator.updateHistory()
+})
+
+$('.history, .download-history, .send-history, .clear-history').hide()

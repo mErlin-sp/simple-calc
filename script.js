@@ -111,7 +111,15 @@ class Calculator {
     updateHistory() {
         $('.history').empty()
         this.getHistory().forEach(([prev, curr, oper, comp]) => {
-            $('.history').append(`<div><span class="prev">${prev}</span> <span class="oper">${oper}</span> <span class="curr">${curr}</span><span class="eq">=</span><span class="comp">${comp}</span></div>`)
+            $('.history').append(`
+                            <div><span class="prev">${prev}</span> 
+                            <span class="oper">${oper}</span>
+                            <span class="curr">${curr}</span>
+                            <div class="break"></div>
+                            <span class="eq">=</span>
+                            <div class="break"></div>
+                            <span class="comp">${comp}</span></div>
+`)
         })
     }
 }
